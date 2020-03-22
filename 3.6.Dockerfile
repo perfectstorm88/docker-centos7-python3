@@ -1,7 +1,7 @@
 FROM centos:7
 MAINTAINER developer ai@wanders.com
 # RUN yum install -y wget bzip2
-# RUN yum install -y git gcc
+# RUN yum install -y git gcc 
 # wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh
 # [linux 下用shell 写入多行文本](https://blog.csdn.net/zhaowei3828/article/details/19114157)
 # [python pip修改安装镜像源](https://blog.csdn.net/jeffery0207/article/details/82965910)
@@ -31,8 +31,8 @@ RUN set -ex \
     && mv /usr/bin/python /usr/bin/python27 \
     && mv /usr/bin/pip /usr/bin/pip-python27 \
     # 配置默认为python3
-    && ln -s /usr/local/python3/bin/python3 /usr/bin/python \
-    && ln -s /usr/local/python3/bin/pip3 /usr/bin/pip
+    && ln -s /usr/local/python3/bin/python /usr/bin/python \
+    && ln -s /usr/local/python3/bin/pip /usr/bin/pip
 # 修复因修改python版本导致yum失效问题
 RUN set -ex \
     && sed -i "s#/usr/bin/python#/usr/bin/python27#" /usr/bin/yum \
@@ -50,9 +50,10 @@ RUN set -ex \
 RUN yum install kde-l10n-Chinese -y
 RUN localedef -c -f UTF-8 -i zh_CN zh_CN.utf8
 # 更新pip版本
+RUN pip install --upgrade pip
 ENV LC_ALL zh_CN.UTF-8
 
-# pip 
+
 COPY pip.conf  /root/.pip/pip.conf
 
 # [Docker -- 使用Docker构建基于centos7镜像的python3.x环境](https://blog.csdn.net/Aeve_imp/article/details/101461488)
