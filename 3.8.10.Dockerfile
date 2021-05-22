@@ -29,7 +29,7 @@ RUN set -ex \
 RUN set -ex \
     # 备份旧版本python
     && mv /usr/bin/python /usr/bin/python27 \
-    && mv /usr/bin/pip /usr/bin/pip-python27 \
+    #&& mv /usr/bin/pip /usr/bin/pip-python27 \
     # 配置默认为python3
     && ln -s /usr/local/python3/bin/python3 /usr/bin/python \
     && ln -s /usr/local/python3/bin/pip3 /usr/bin/pip
